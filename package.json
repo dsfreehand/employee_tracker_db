@@ -1,0 +1,19 @@
+{
+  "name": "employee-tracker-db",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.11.11",
+    "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "@types/node": "^22.13.9",
+    "dotenv": "^16.4.7",
+    "inquirer": "^12.4.2",
+    "pg": "^8.13.3"
+  }
+}
