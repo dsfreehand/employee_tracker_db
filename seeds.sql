@@ -17,7 +17,8 @@ CREATE TABLE employee (
   first_name VARCHAR(30) NOT NULL,
   last_name VARCHAR(30) NOT NULL,
   role_id INTEGER NOT NULL REFERENCES role(id),
-  manager_id INTEGER REFERENCES employee(id)
+  manager_id INTEGER REFERENCES employee(id),
+  department_id INTEGER NOT NULL REFERENCES department(id)
 );
 
 INSERT INTO department (name) VALUES
@@ -32,10 +33,10 @@ INSERT INTO department (name) VALUES
   ('Lawyer', 120000, 3),
   ('Sales Lead', 80000, 4);
 
-    INSERT INTO employee (first_name, last_name, role_id) VALUES
-    ('Alice', 'Johnson', 1),
-    ('Bob', 'Smith', 2),
-    ('Charlie', 'Brown', 3),
-    ('Diana', 'Jones', 4);
+ INSERT INTO employee (first_name, last_name, role_id, department_id) VALUES
+  ('Alice', 'Johnson', 1, 1), 
+  ('Bob', 'Smith', 2, 2),      
+  ('Charlie', 'Brown', 3, 3),  
+  ('Diana', 'Jones', 4, 4);    
 
-SELECT * FROM role
+DELETE FROM role WHERE title='Marketing Strategist';
