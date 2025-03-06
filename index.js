@@ -546,6 +546,49 @@ const viewDepartmentBudget = async () => {
   }
 };
 
+// Function to delete a department
+const deleteDepartment = async () => {
+  const departmentsRes = await client.query("SELECT * FROM department");
+  const departmentChoices = departmentsRes.rows.map((department) => ({
+    name: department.name,
+    value: department.id,
+  }));
+
+  if (departmentChoices.length === 0) {
+    console.log("No departments found to delete.");
+    return;
+  }
+
+  const { department_id, confirmDelete } = await inquirer.prompt([
+    {
+      type: "list",
+      name: "department_id",
+      message: "Select a department to delete:",
+      choices: departmentChoices,
+    },
+    {
+      type: "confirm",
+      name: "confirmDelete",
+      message: "Are you sure you want to delete this department? This cannot be undone.",
+      default: false,
+    },
+  ]);
+
+  if (!confirmDelete) {
+    console.log("Department deletion canceled.");
+    return;
+  }
+
+  try {
+    await client.query("DELETE FROM department WHERE id = $1", [department_id]);
+    console.log("Department deleted successfully!");
+  } catch (error) {
+    console.error("Error deleting department:", error.message);
+  }
+};
+
+
+
 // Main function to run the application
 const runApp = async () => {
   let continueApp = true;
